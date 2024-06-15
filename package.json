@@ -1,0 +1,27 @@
+{
+  "name": "fullstack_test_todo_backend",
+  "version": "1.0.0",
+  "main": "index.js",
+  "scripts": {
+    "start": "node index.js",
+    "dev": "nodemon index.js",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/brazvan168/fullstack_test_todo_backend.git"
+  },
+  "author": "Razvan Birisan",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/brazvan168/fullstack_test_todo_backend/issues"
+  },
+  "homepage": "https://github.com/brazvan168/fullstack_test_todo_backend#readme",
+  "description": "",
+  "dependencies": {
+    "express": "^4.19.2"
+  },
+  "devDependencies": {
+    "nodemon": "^3.1.3"
+  }
+}
