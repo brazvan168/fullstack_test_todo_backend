@@ -19,6 +19,7 @@
   "homepage": "https://github.com/brazvan168/fullstack_test_todo_backend#readme",
   "description": "",
   "dependencies": {
+    "cors": "^2.8.5",
     "express": "^4.19.2"
   },
   "devDependencies": {

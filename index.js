@@ -11,6 +11,10 @@ const requestLogger = (request, response, next) => {
   next()
 }
 
+const cors = require('cors')
+
+app.use(cors())
+
 const errorHandler = (error, request, response, next) => {
   console.log(error);
   if (error instanceof SyntaxError && error.status === 400 && 'body' in error) {
@@ -60,9 +64,15 @@ app.post('/api/todos', (request, response) => {
     })
   }
 
+  if (body.completed === undefined) {
+    return response.status(400).json({ 
+      error: 'missing completed field' 
+    })
+  }
+
   const item = {
     content: body.content,
-    completed: false,
+    completed: Boolean(body.completed) || false,
     id: generateId(),
   }
 
@@ -81,6 +91,12 @@ app.delete('/api/todos/:id', (request, response) => {
 app.put('/api/todos/:id', (request, response, next) => {
   const id = Number(request.params.id)
   const body = request.body
+
+  if (body.content === undefined || !body.content) {
+    return response.status(400).json({ 
+      error: 'missing content' 
+    })
+  }
   
   if (body.completed === undefined) {
     return response.status(400).json({ 
@@ -93,7 +109,7 @@ app.put('/api/todos/:id', (request, response, next) => {
   if (!item) {
     response.status(404).end()
   } else {
-    const changedItem = { ...item, completed: Boolean(body.completed) || false }
+    const changedItem = { ...item, content: body.content, completed: Boolean(body.completed) || false }
     items = items.map( item => item.id !== id ? item : changedItem )
     response.json(changedItem)
   }
